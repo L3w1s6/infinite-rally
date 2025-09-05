@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwwm065sa3xce"]
+
+[ext_resource type="Script" uid="uid://bk3eqtj13kmn" path="res://Addons/gevp/scripts/vehicle.gd" id="1_yi23e"]
+[ext_resource type="PackedScene" uid="uid://b2hlchrj4h2b7" path="res://Addons/gevp/scenes/engine_sound.tscn" id="2_u41r7"]
+[ext_resource type="PackedScene" uid="uid://h6vdpba71kpr" path="res://Addons/gevp/scenes/smoke_effect.tscn" id="3_aky6y"]
+[ext_resource type="Script" uid="uid://do5lqdm76ewdo" path="res://Addons/gevp/scripts/wheel.gd" id="4_aqss3"]
+
+[sub_resource type="Curve" id="Curve_hnsbd"]
+_data = [Vector2(0, 0.609756), 0.0, 0.0, 0, 0, Vector2(0.217281, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.789473), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("front_left_wheel", "front_right_wheel", "rear_left_wheel", "rear_right_wheel")]
+script = ExtResource("1_yi23e")
+front_left_wheel = NodePath("RayCast3DFL")
+front_right_wheel = NodePath("RayCast3DFR")
+rear_left_wheel = NodePath("RayCast3DBL")
+rear_right_wheel = NodePath("RayCast3DBR")
+throttle_speed = 40.0
+max_torque = 600.0
+max_rpm = 8000.0
+torque_curve = SubResource("Curve_hnsbd")
+automatic_transmission = false
+
+[node name="CollisionShape3DBody" type="CollisionShape3D" parent="."]
+
+[node name="EngineSound" parent="." node_paths=PackedStringArray("vehicle") instance=ExtResource("2_u41r7")]
+vehicle = NodePath("..")
+
+[node name="TireSmoke" parent="." node_paths=PackedStringArray("vehicle") instance=ExtResource("3_aky6y")]
+vehicle = NodePath("..")
+
+[node name="MeshesBody" type="Node3D" parent="."]
+
+[node name="RayCast3DBR" type="RayCast3D" parent="." node_paths=PackedStringArray("wheel_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1.5)
+script = ExtResource("4_aqss3")
+wheel_node = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="RayCast3DBR"]
+
+[node name="MeshesBR" type="Node3D" parent="RayCast3DBR/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999418, 0.173413, -1.47401)
+
+[node name="RayCast3DFR" type="RayCast3D" parent="." node_paths=PackedStringArray("wheel_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.5)
+script = ExtResource("4_aqss3")
+wheel_node = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="RayCast3DFR"]
+
+[node name="MeshesFR" type="Node3D" parent="RayCast3DFR/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999418, 0.193815, 1.95202)
+
+[node name="RayCast3DFL" type="RayCast3D" parent="." node_paths=PackedStringArray("wheel_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
+script = ExtResource("4_aqss3")
+wheel_node = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="RayCast3DFL"]
+
+[node name="MeshesFL" type="Node3D" parent="RayCast3DFL/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999, 0.194, 1.952)
+
+[node name="RayCast3DBL" type="RayCast3D" parent="." node_paths=PackedStringArray("wheel_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1.5)
+script = ExtResource("4_aqss3")
+wheel_node = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="RayCast3DBL"]
+
+[node name="MeshesBL" type="Node3D" parent="RayCast3DBL/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999, 0.173, -1.474)

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://biwr6u0x0wdoo"]
+
+[ext_resource type="PackedScene" uid="uid://dxnvsoi1pvfeu" path="res://Addons/gevp/scenes/track.tscn" id="1_5a7ea"]
+[ext_resource type="Script" uid="uid://dlxmi0yyr7nsk" path="res://Addons/gevp/scripts/vehicle_controllergd.gd" id="2_8j60k"]
+[ext_resource type="Script" uid="uid://drfho0a7slrg8" path="res://Addons/gevp/scripts/camera.gd" id="2_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://b2ee472viddx2" path="res://Scenes/chevrolet_camaro.tscn" id="3_fo5ed"]
+[ext_resource type="Script" uid="uid://bjobejv03g62l" path="res://Addons/gevp/scripts/gui.gd" id="5_fo5ed"]
+[ext_resource type="Script" uid="uid://cbaaxrhjndihn" path="res://Addons/gevp/scripts/debug.gd" id="6_o06y3"]
+[ext_resource type="Script" uid="uid://d2l1gv8rvnine" path="res://Addons/gevp/scripts/debug_ui.gd" id="7_k7acu"]
+
+[node name="World" type="Node3D"]
+
+[node name="Demo" parent="." instance=ExtResource("1_5a7ea")]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("follow_this")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58998, 2.76582)
+script = ExtResource("2_fo5ed")
+follow_this = NodePath("../VehicleController/ChevroletCamaro")
+
+[node name="VehicleController" type="Node3D" parent="." node_paths=PackedStringArray("vehicle_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18336, 0)
+script = ExtResource("2_8j60k")
+vehicle_node = NodePath("ChevroletCamaro")
+
+[node name="ChevroletCamaro" parent="VehicleController" instance=ExtResource("3_fo5ed")]
+
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("vehicle")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_fo5ed")
+vehicle = NodePath("../VehicleController/ChevroletCamaro")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed" type="Label" parent="GUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="RPM" type="Label" parent="GUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Gear" type="Label" parent="GUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Debug" type="Node" parent="." node_paths=PackedStringArray("vehicle")]
+script = ExtResource("6_o06y3")
+vehicle = NodePath("../VehicleController/ChevroletCamaro")
+
+[node name="DebugUI" type="Control" parent="Debug"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_k7acu")
+metadata/_edit_use_anchors_ = true
