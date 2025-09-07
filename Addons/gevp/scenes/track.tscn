@@ -84,6 +84,7 @@ path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 1.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 3.0

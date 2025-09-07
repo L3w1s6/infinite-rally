@@ -854,18 +854,25 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3frhs")
 
 [node name="ChevroletCamaro" type="RigidBody3D" node_paths=PackedStringArray("front_left_wheel", "front_right_wheel", "rear_left_wheel", "rear_right_wheel")]
+mass = 1500.0
 script = ExtResource("1_hnsbd")
 front_left_wheel = NodePath("RayCast3DFL")
 front_right_wheel = NodePath("RayCast3DFR")
 rear_left_wheel = NodePath("RayCast3DBL")
 rear_right_wheel = NodePath("RayCast3DBR")
+steering_slip_assist = 999999.0
+countersteer_assist = 0.0
 throttle_speed = 40.0
+traction_control_max_slip = -1.0
+enable_stability = false
 max_torque = 600.0
 max_rpm = 8000.0
 torque_curve = SubResource("Curve_hnsbd")
 automatic_transmission = false
 front_tire_radius = 0.391
+front_tire_width = 260.0
 rear_tire_radius = 0.416
+rear_tire_width = 262.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309096, -0.0535889)

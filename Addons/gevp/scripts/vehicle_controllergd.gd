@@ -48,7 +48,6 @@ class_name VehicleController
 @export var string_shift_down: String = "Shift Down"
 
 func _physics_process(_delta):
-	
 	if string_brake_input != "":
 		vehicle_node.brake_input = Input.get_action_strength(string_brake_input)
 
@@ -75,9 +74,3 @@ func _physics_process(_delta):
 	if string_shift_down != "":
 		if Input.is_action_just_pressed(string_shift_down):
 			vehicle_node.manual_shift(-1)
-	
-	# Reverse gear logic
-
-	if vehicle_node.current_gear == -1:
-		vehicle_node.brake_input = Input.get_action_strength(string_throttle_input)
-		vehicle_node.throttle_input = Input.get_action_strength(string_brake_input)
