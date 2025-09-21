@@ -1,11 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnjh70ms702od"]
+[gd_scene load_steps=5 format=3 uid="uid://bnjh70ms702od"]
 
 [ext_resource type="Script" uid="uid://7m4x5j804qjs" path="res://Scenes/stage_generator.gd" id="1_d6jxy"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d6jxy"]
+noise_type = 3
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wvfk2"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_d6jxy")
+
+[sub_resource type="Curve3D" id="Curve3D_d6jxy"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 177.493, 32.549, 29.9385, 0, 0, 0, 0, 0, 0, 77.283, 38.8235, -43.0957, 0, 0, 0, 0, 0, 0, 65.5969, 54.5098, -26.865, 0, 0, 0, 0, 0, 0, 95.381, 51.3726, -15.1641, 0, 0, 0, 0, 0, 0, 112.873, 27.0588, -41.9603, 0, 0, 0, 0, 0, 0, 19.2341, 47.0588, 90.2357, 0, 0, 0, 0, 0, 0, -33.2526, 40.3922, 266.591, 0, 0, 0, 0, 0, 0, 110.668, 79.6078, 369.625, 0, 0, 0, 0, 0, 0, 218.587, 40, 255.597, 0, 0, 0, 0, 0, 0, 292.994, 25.4902, 319.374, 0, 0, 0, 0, 0, 0, 253.404, 38.4314, 333.396, 0, 0, 0, 0, 0, 0, 102.118, 19.6078, 204.115, 0, 0, 0, 0, 0, 0, -73.668, 54.902, 195.434, 0, 0, 0, 0, 0, 0, -150.585, 66.2745, 312.412, 0, 0, 0, 0, 0, 0, -117.474, 66.2745, 144.648, 0, 0, 0, 0, 0, 0, 32.4184, 49.0196, 94.6843),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 16
+
 [node name="StageGenerator" type="Node3D"]
 script = ExtResource("1_d6jxy")
+dummyUpdate = 0
+noise = SubResource("NoiseTexture2D_wvfk2")
+heightScale = 100.0
+minLength = 10.0
+maxAngleRange = 90.0
 
 [node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_d6jxy")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="." groups=["Road"]]
 use_collision = true

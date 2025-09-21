@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://biwr6u0x0wdoo"]
+[gd_scene load_steps=9 format=3 uid="uid://biwr6u0x0wdoo"]
 
 [ext_resource type="PackedScene" uid="uid://dxnvsoi1pvfeu" path="res://Addons/gevp/scenes/track.tscn" id="1_5a7ea"]
 [ext_resource type="Script" uid="uid://dlxmi0yyr7nsk" path="res://Addons/gevp/scripts/vehicle_controllergd.gd" id="2_8j60k"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bjobejv03g62l" path="res://Addons/gevp/scripts/gui.gd" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://cbaaxrhjndihn" path="res://Addons/gevp/scripts/debug.gd" id="6_o06y3"]
 [ext_resource type="Script" uid="uid://d2l1gv8rvnine" path="res://Addons/gevp/scripts/debug_ui.gd" id="7_k7acu"]
-[ext_resource type="Script" uid="uid://cir88u10r61f2" path="res://Scripts/path_3d_generated.gd" id="8_k7acu"]
 
 [sub_resource type="Curve3D" id="Curve3D_o06y3"]
 _data = {
@@ -78,24 +77,6 @@ visible = false
 curve = SubResource("Curve3D_o06y3")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D" groups=["Road"]]
-use_collision = true
-polygon = PackedVector2Array(0, 0, 0, 0.25, 5, 0.25, 5, 0)
-mode = 2
-path_node = NodePath("..")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-
-[node name="Path3DGenerated" type="Path3D" parent="."]
-script = ExtResource("8_k7acu")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3DGenerated" groups=["Road"]]
 use_collision = true
 polygon = PackedVector2Array(0, 0, 0, 0.25, 5, 0.25, 5, 0)
 mode = 2
