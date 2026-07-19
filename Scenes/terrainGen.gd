@@ -110,6 +110,5 @@ func clearMesh():
 
 #called once initially
 func _ready() -> void:
-	
 	genTerrain()
 	print("ready")
