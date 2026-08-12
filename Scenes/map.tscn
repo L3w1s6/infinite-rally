@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bcnroawi32yme"]
+
+[ext_resource type="Script" uid="uid://dp22mmrd4ke7k" path="res://Scenes/map2.gd" id="1_ci6au"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ci6au"]
+noise_type = 0
+seed = 1076177756
+frequency = 0.005
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_26yhd"]
+noise_type = 2
+seed = -1150766783
+frequency = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myvm1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p3ir5"]
+material = SubResource("StandardMaterial3D_myvm1")
+size = Vector3(1, 4, 1)
+
+[node name="Map" type="Node3D" unique_id=872922062]
+script = ExtResource("1_ci6au")
+height_noise = SubResource("FastNoiseLite_ci6au")
+terrain_size = Vector2(500, 500)
+height_scale = 50.0
+forest_noise = SubResource("FastNoiseLite_26yhd")
+tree_mesh = SubResource("BoxMesh_p3ir5")
+tree_count = 2000
+
+[node name="@MeshInstance3D@37029" type="MeshInstance3D" parent="." unique_id=327508053]
+
+[node name="@MultiMeshInstance3D@37030" type="MultiMeshInstance3D" parent="." unique_id=1975405867]

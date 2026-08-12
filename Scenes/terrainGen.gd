@@ -1,11 +1,16 @@
 @tool
 extends MeshInstance3D
 
+@export_group("Terrain")
+@export_group("Clutter")
+
+@export_group("Mesh")
 @export var xSize = 20: #resolution x
 	set(value): xSize = max(value, 0)
 @export var zSize = 20: #resolution z
 	set(value): zSize = max(value, 0)
 
+@export_group("")
 @export var drawPoints = true
 
 @export var update = false: #recreate mesh

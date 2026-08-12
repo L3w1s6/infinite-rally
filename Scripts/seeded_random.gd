@@ -1,4 +1,5 @@
-class_name SeededRandom extends Object
+class_name SeededRandom
+extends Object
 
 var startSeed: int
 var seedOffset: int
