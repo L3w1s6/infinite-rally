@@ -6,12 +6,13 @@ extends Node3D
 	get():
 		return 0
 	set(value):
-		genCurve()
-		print("curve generated ----")
-		$Path3D.curve = curve
+		if curve:
+			genCurve()
+			print("curve generated ----")
+		%Path3D.curve = curve
 
 @export_group("Map Properties")
-@export var noise: NoiseTexture2D
+@export var noise := NoiseTexture2D.new()
 @export var coordScale := 1.
 @export var heightScale := 10.
 @export var randomiserSeed := 0
