@@ -27,8 +27,8 @@ func run() -> void:
 	
 	if tree_mesh and enable_forest:
 		_generate_forest()
-	else:
-		push_warning("No Tree Mesh assigned! Skipping forest generation.")
+	#else:
+		#push_warning("No Tree Mesh assigned! Skipping forest generation.")
 
 func cleanup() -> void:
 	print("cleanup")
@@ -47,7 +47,7 @@ func _ready() -> void:
 	run()
 
 #hacky skip mesh during save to avoid saving to tscn file
-func _notification(what:int) -> void:
+func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_EDITOR_PRE_SAVE:
 			if terrain_instance: terrain_instance.mesh = null
@@ -70,9 +70,20 @@ func _setup_noise() -> void:
 	forest_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	forest_noise.seed = randi() + 1
 	forest_noise.frequency = 0.02
+	
+	# terrain texture material setup
+	terrain_material = StandardMaterial3D.new()
+	var tex = NoiseTexture2D.new()
+	tex.noise = height_noise
+	var colourGrad = Gradient.new()
+	colourGrad.set_color(0, Color(0, 1, 0))
+	colourGrad.set_color(1, Color(0, 0, 0))
+	tex.color_ramp = colourGrad
+	terrain_material.set_texture(BaseMaterial3D.TEXTURE_ALBEDO, tex)
 
 var terrain_instance: MeshInstance3D
 var terrain_mesh: Mesh
+var terrain_material: StandardMaterial3D
 func _generate_terrain() -> void:
 	# 1. Create a flat base plane
 	var plane := PlaneMesh.new()
@@ -104,6 +115,7 @@ func _generate_terrain() -> void:
 	st.clear()
 	st.create_from(array_mesh, 0)
 	st.generate_normals()
+	st.set_material(terrain_material)
 	array_mesh = st.commit()
 
 	# 5. Add terrain to the scene
@@ -112,7 +124,7 @@ func _generate_terrain() -> void:
 	
 	terrain_instance.mesh = terrain_mesh
 	add_child(terrain_instance)
-	terrain_instance.owner = get_tree().edited_scene_root #makes visible in scene dock
+	terrain_instance.owner = get_tree().edited_scene_root #make visible in scene dock
 
 var forest_instance: MultiMeshInstance3D
 var forest_multimesh: MultiMesh

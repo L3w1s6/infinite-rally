@@ -4,12 +4,11 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ci6au"]
 noise_type = 0
-seed = 1076177756
 frequency = 0.005
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_26yhd"]
 noise_type = 2
-seed = -1150766783
+seed = -2076941964
 frequency = 0.02
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myvm1"]
@@ -28,6 +27,6 @@ forest_noise = SubResource("FastNoiseLite_26yhd")
 tree_mesh = SubResource("BoxMesh_p3ir5")
 tree_count = 2000
 
-[node name="@MeshInstance3D@37029" type="MeshInstance3D" parent="." unique_id=327508053]
+[node name="@MeshInstance3D@22071" type="MeshInstance3D" parent="." unique_id=63603693]
 
-[node name="@MultiMeshInstance3D@37030" type="MultiMeshInstance3D" parent="." unique_id=1975405867]
+[node name="@MultiMeshInstance3D@22072" type="MultiMeshInstance3D" parent="." unique_id=1446171226]
